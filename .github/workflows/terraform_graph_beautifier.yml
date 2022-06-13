@@ -70,15 +70,16 @@ jobs:
         run: |
           echo ::set-output name="GOPATH::$(go env GOPATH)"
           # go get -u github.com/pcasteran/terraform-graph-beautifier
-          go get -d github.com/pcasteran/terraform-graph-beautifier
+          # go get -d github.com/pcasteran/terraform-graph-beautifier
+          go install github.com/pcasteran/terraform-graph-beautifier
 
       - name: Create graph
         run: |
-          DATE="$(date '+%04Y-%02m-%02d')"
+          DATE="$(date '+%Y-%m-%d')"
           git config user.email "tqer39+github-actions@gmail.com"
           git config user.name "Github Actions"
           git remote set-url origin "https://github-actions:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}"
-          git checkout -b "terraform-graph-beautifier/${DATE}-${GITHUB_RUN_NUMBER}"
+          git switch -c "terraform-graph-beautifier/${DATE}-${GITHUB_RUN_NUMBER}"
 
           terraform -chdir="${{ env.TF_PATH }}" | terraform-graph-beautifier \
             --exclude="module.root.provider" \
