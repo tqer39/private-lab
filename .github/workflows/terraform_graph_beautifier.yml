@@ -69,7 +69,8 @@ jobs:
       - name: Setup terraform-graph-beautifier
         run: |
           echo ::set-output name="GOPATH::$(go env GOPATH)"
-          go get -u github.com/pcasteran/terraform-graph-beautifier
+          # go get -u github.com/pcasteran/terraform-graph-beautifier
+          go get -d github.com/pcasteran/terraform-graph-beautifier
 
       - name: Create graph
         run: |
