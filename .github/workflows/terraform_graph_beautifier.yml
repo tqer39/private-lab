@@ -69,21 +69,26 @@ jobs:
       - name: Setup terraform-graph-beautifier
         run: |
           # echo ::set-output name="GOPATH::$(go env GOPATH)"
-          echo "PATH: ${PATH}"
-          echo "GOROOT: ${GOROOT}"
-          echo "GOPATH: ${GOPATH}"
-          # go get -u github.com/pcasteran/terraform-graph-beautifier
+          # echo "PATH: ${PATH}"
+          # echo "GOROOT: ${GOROOT}"
+          # echo "GOPATH: ${GOPATH}"
+          export PATH="${PATH}:/usr/local/go/bin"
+          go get -u github.com/pcasteran/terraform-graph-beautifier
           # go get -d github.com/pcasteran/terraform-graph-beautifier
-          go install github.com/pcasteran/terraform-graph-beautifier
+          # go install github.com/pcasteran/terraform-graph-beautifier
 
-      - name: Create graph
+      - name: Create branch
         run: |
           DATE="$(date '+%Y-%m-%d')"
           git config user.email "tqer39+github-actions@gmail.com"
           git config user.name "Github Actions"
           git remote set-url origin "https://github-actions:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}"
           git switch -c "terraform-graph-beautifier/${DATE}-${GITHUB_RUN_NUMBER}"
+        env:
+          TZ: "Asia/Tokyo"
 
+      - name: Create graph
+        run: |
           terraform -chdir="${{ env.TF_PATH }}" | terraform-graph-beautifier \
             --exclude="module.root.provider" \
             --output-type=cyto-html \
@@ -92,5 +97,3 @@ jobs:
           git add .
           git commit -m "GitHub Actions から差分を Push"
           git push origin "HEAD:${GITHUB_REF}"
-        env:
-          TZ: "Asia/Tokyo"
