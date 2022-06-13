@@ -1,6 +1,8 @@
 ---
 # see https://pre-commit.com
 
+exclude: ^go.(mod|sum)$
+
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.2.0

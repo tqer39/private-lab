@@ -56,6 +56,7 @@
     "codestarconnections",
     "codestarnotifications",
     "pcasteran",
-    "cyto"
+    "cyto",
+    "GOPATH"
   ]
 }
