@@ -1,0 +1,81 @@
+---
+name: Terraform Graph Beautifier
+
+on:
+  pull_request:
+    branches:
+      - feature/add-terraform-graph-beautifier
+  push:
+    branches:
+      - feature/add-terraform-graph-beautifier
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  deployments: write
+  id-token: write
+  pull-requests: write
+
+concurrency: terraform-graph-beautifier
+
+env:
+  AWS_ACCOUNT_ID: 107662415716
+  ENV_NAME: sandbox
+  OIDC_IAM_ROLE: sandbox-private-lab-deploy
+  TF_PATH: ./terraform/environments/sandbox/base_apne1
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+
+      - name: AWS Credential
+        uses: ./.github/actions/aws-credential
+        with:
+          oidc-iam-role: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/${{ env.OIDC_IAM_ROLE }}
+
+      - name: Get current Terraform version
+        id: get-tf-version
+        run: |
+          echo ::set-output name="TERRAFORM_VERSION::$(cat .terraform-version)"
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: ${{ steps.get-tf-version.outputs.TERRAFORM_VERSION }}
+
+      - name: Get current Go version
+        id: get-go-version
+        run: |
+          echo ::set-output name="GO_VERSION::$(cat .go-version)"
+
+      - name: Setup Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: "${{ steps.get-go-version.outputs.GO_VERSION }}"
+
+      - name: Setup terraform-graph-beautifier
+        run: |
+          go get -u github.com/pcasteran/terraform-graph-beautifier
+
+      - name: Create graph
+        run: |
+          DATE="$(date '+%04Y-%02m-%02d')"
+          git config user.email "tqer39+github-actions@gmail.com"
+          git config user.name "Github Actions"
+          git remote set-url origin "https://github-actions:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}"
+          git checkout -b "terraform-graph-beautifier/${DATE}-${GITHUB_RUN_NUMBER}"
+
+          terraform -chdir="${{ env.TF_PATH }}" | terraform-graph-beautifier \
+            --exclude="module.root.provider" \
+            --output-type=cyto-html \
+            > "${{ env.TF_PATH }}/dependence.html"
+
+          git add .
+          git commit -m "GitHub Actions から差分を Push"
+          git push origin "HEAD:${GITHUB_REF}"
+        env:
+          TZ: "Asia/Tokyo"
