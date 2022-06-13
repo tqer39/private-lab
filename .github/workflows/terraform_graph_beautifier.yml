@@ -68,12 +68,13 @@ jobs:
 
       - name: Setup terraform-graph-beautifier
         run: |
+          export PATH="${PATH}:/usr/local/go/bin"
           # echo ::set-output name="GOPATH::$(go env GOPATH)"
           # echo "PATH: ${PATH}"
           # echo "GOROOT: ${GOROOT}"
           # echo "GOPATH: ${GOPATH}"
-          export PATH="${PATH}:/usr/local/go/bin"
-          go get -u github.com/pcasteran/terraform-graph-beautifier
+          # go get -u github.com/pcasteran/terraform-graph-beautifier
+          go get github.com/pcasteran/terraform-graph-beautifier
           # go get -d github.com/pcasteran/terraform-graph-beautifier
           # go install github.com/pcasteran/terraform-graph-beautifier
 
@@ -89,7 +90,7 @@ jobs:
 
       - name: Create graph
         run: |
-          terraform -chdir="${{ env.TF_PATH }}" | terraform-graph-beautifier \
+          terraform -chdir="${{ env.TF_PATH }}" | ~/go/bin/terraform-graph-beautifier \
             --exclude="module.root.provider" \
             --output-type=cyto-html \
             > "${{ env.TF_PATH }}/dependence.html"
