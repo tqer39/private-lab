@@ -100,6 +100,7 @@ jobs:
           # exec "${SHELL}" -l
           # 下記はエラー
           # which terraform-graph-beautifier
+          ls ~/go/bin
 
       - name: Create branch
         run: |
