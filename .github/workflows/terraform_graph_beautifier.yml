@@ -78,6 +78,7 @@ jobs:
 
       - name: Setup terraform-graph-beautifier
         run: |
+          go mod init github.com/tqer39/private-lab
           export PATH="${PATH}:/usr/local/go/bin"
           echo "which go ========================================"
           which go
