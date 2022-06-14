@@ -85,8 +85,8 @@ jobs:
           # 下記はエラー
           # which terraform-graph-beautifier
 
-          # echo "ls \$GOPATH/bin ========================================"
-          ls "$GOPATH/bin"
+          # echo "$GOBIN"
+          echo "$GOBIN"
 
       - name: Create branch
         run: |

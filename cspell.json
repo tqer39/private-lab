@@ -58,6 +58,7 @@
     "pcasteran",
     "cyto",
     "GOPATH",
-    "GOROOT"
+    "GOROOT",
+    "GOBIN"
   ]
 }
