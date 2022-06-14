@@ -69,7 +69,9 @@ jobs:
       - name: Setup terraform-graph-beautifier
         run: |
           export PATH="${PATH}:/usr/local/go/bin"
+          echo "which go ========================================"
           which go
+          echo "go env ========================================"
           go env
           # echo ::set-output name="GOPATH::$(go env GOPATH)"
           # echo "PATH: ${PATH}"
@@ -79,6 +81,10 @@ jobs:
           # go get github.com/pcasteran/terraform-graph-beautifier
           # go get -d github.com/pcasteran/terraform-graph-beautifier
           go install github.com/pcasteran/terraform-graph-beautifier
+          echo "which terraform-graph-beautifier ========================================"
+          which terraform-graph-beautifier
+          # echo "\$GOPATH/bin ========================================"
+          ls "$GOPATH/bin"
 
       - name: Create branch
         run: |
