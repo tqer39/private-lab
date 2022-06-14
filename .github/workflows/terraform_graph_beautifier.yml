@@ -104,6 +104,7 @@ jobs:
           # which terraform-graph-beautifier
           # ls ~/go/bin
 
+          terraform -chdir="${{ env.TF_PATH }}" init -reconfigure
           terraform -chdir="${{ env.TF_PATH }}" graph
 
           # terraform -chdir="${{ env.TF_PATH }}" graph | "$HOME/go/bin/terraform-graph-beautifier" \
