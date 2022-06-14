@@ -69,6 +69,8 @@ jobs:
       - name: Setup terraform-graph-beautifier
         run: |
           export PATH="${PATH}:/usr/local/go/bin"
+          which go
+          go env
           # echo ::set-output name="GOPATH::$(go env GOPATH)"
           # echo "PATH: ${PATH}"
           # echo "GOROOT: ${GOROOT}"
@@ -90,7 +92,7 @@ jobs:
 
       - name: Create graph
         run: |
-          terraform -chdir="${{ env.TF_PATH }}" | ~/go/bin/terraform-graph-beautifier \
+          terraform -chdir="${{ env.TF_PATH }}" | /usr/share/go/bin/terraform-graph-beautifier \
             --exclude="module.root.provider" \
             --output-type=cyto-html \
             > "${{ env.TF_PATH }}/dependence.html"
