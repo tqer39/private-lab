@@ -87,15 +87,17 @@ jobs:
           # echo "PATH: ${PATH}"
           # echo "GOROOT: ${GOROOT}"
           # echo "GOPATH: ${GOPATH}"
-          # go get -u github.com/pcasteran/terraform-graph-beautifier
+          go get -u github.com/pcasteran/terraform-graph-beautifier
           # go get github.com/pcasteran/terraform-graph-beautifier
           # go get -d github.com/pcasteran/terraform-graph-beautifier
-          go install github.com/pcasteran/terraform-graph-beautifier
+          # go install github.com/pcasteran/terraform-graph-beautifier
           echo "which terraform-graph-beautifier ========================================"
-          # 下記はエラー
-          # which terraform-graph-beautifier
 
-          ls "/opt/hostedtoolcache/go/1.17.11/x64/bin"
+          # ls "/opt/hostedtoolcache/go/1.17.11/x64/bin"
+          # exec "${SHELL}" -l
+          # 下記はエラー
+          which terraform-graph-beautifier
+
 
       - name: Create branch
         run: |
