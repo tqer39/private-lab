@@ -75,6 +75,8 @@ jobs:
           echo "${GOROOT}"
         # env:
         #   GOPATH: /home/runner/work/woodpecker/go
+      - name: Add to PATH
+        run: export PATH="$PATH:/usr/local/go/bin/"
 
       - name: Setup terraform-graph-beautifier
         run: |
