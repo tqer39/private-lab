@@ -93,9 +93,9 @@ jobs:
           # go get -u github.com/pcasteran/terraform-graph-beautifier
           # go get -u github.com/goccy/go-graphviz
           # go get github.com/pcasteran/terraform-graph-beautifier
-          # go get -d github.com/pcasteran/terraform-graph-beautifier
-          go get -u gonum.org/v1/gonum/...
-          go install github.com/pcasteran/terraform-graph-beautifier@v0.2.0
+          go get -d github.com/pcasteran/terraform-graph-beautifier
+          # go get -u gonum.org/v1/gonum/...
+          # go install github.com/pcasteran/terraform-graph-beautifier@v0.2.0
           # echo "which terraform-graph-beautifier ========================================"
 
           # ls "/opt/hostedtoolcache/go/1.17.11/x64/bin"
@@ -121,6 +121,8 @@ jobs:
             --output-type=cyto-html \
             > "${{ env.TF_PATH }}/dependence.html"
 
-          git add .
-          git commit -m "GitHub Actions から差分を Push"
-          git push origin "HEAD:${GITHUB_REF}"
+          # git add "${{ env.TF_PATH }}/dependence.html"
+          # git commit -m "GitHub Actions から差分を Push"
+          # git push origin "HEAD:${GITHUB_REF}"
+          # git switch main
+          # git merge "HEAD:${GITHUB_REF}"
