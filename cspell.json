@@ -62,6 +62,7 @@
     "GOBIN",
     "hostedtoolcache",
     "goccy",
-    "graphviz"
+    "graphviz",
+    "gonum"
   ]
 }

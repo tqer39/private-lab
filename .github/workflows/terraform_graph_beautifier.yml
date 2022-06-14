@@ -94,6 +94,7 @@ jobs:
           # go get -u github.com/goccy/go-graphviz
           # go get github.com/pcasteran/terraform-graph-beautifier
           # go get -d github.com/pcasteran/terraform-graph-beautifier
+          go get -u gonum.org/v1/gonum/...
           go install github.com/pcasteran/terraform-graph-beautifier@v0.2.0
           # echo "which terraform-graph-beautifier ========================================"
 
