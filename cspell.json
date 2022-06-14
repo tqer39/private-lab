@@ -60,6 +60,8 @@
     "GOPATH",
     "GOROOT",
     "GOBIN",
-    "hostedtoolcache"
+    "hostedtoolcache",
+    "goccy",
+    "graphviz"
   ]
 }
