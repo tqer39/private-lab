@@ -105,12 +105,12 @@ jobs:
           # ls ~/go/bin
 
           terraform -chdir="${{ env.TF_PATH }}" init -reconfigure
-          terraform -chdir="${{ env.TF_PATH }}" graph
+          # terraform -chdir="${{ env.TF_PATH }}" graph
 
-          # terraform -chdir="${{ env.TF_PATH }}" graph | "$HOME/go/bin/terraform-graph-beautifier" \
-          #   --exclude="module.root.provider" \
-          #   --output-type=cyto-html \
-          #   > "${{ env.TF_PATH }}/dependence.html"
+          terraform -chdir="${{ env.TF_PATH }}" graph | "$HOME/go/bin/terraform-graph-beautifier" \
+            --exclude="module.root.provider" \
+            --output-type=cyto-html \
+            > "${{ env.TF_PATH }}/dependence.html"
 
       - name: Create branch
         run: |
