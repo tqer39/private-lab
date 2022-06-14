@@ -85,8 +85,8 @@ jobs:
           # 下記はエラー
           # which terraform-graph-beautifier
 
-          # echo "$GOBIN"
-          echo "$GOBIN"
+          # ls "\$GOROOT"
+          ls "$GOROOT"
 
       - name: Create branch
         run: |
