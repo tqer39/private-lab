@@ -82,8 +82,10 @@ jobs:
           # go get -d github.com/pcasteran/terraform-graph-beautifier
           go install github.com/pcasteran/terraform-graph-beautifier
           echo "which terraform-graph-beautifier ========================================"
-          which terraform-graph-beautifier
-          # echo "\$GOPATH/bin ========================================"
+          # 下記はエラー
+          # which terraform-graph-beautifier
+
+          # echo "ls \$GOPATH/bin ========================================"
           ls "$GOPATH/bin"
 
       - name: Create branch
