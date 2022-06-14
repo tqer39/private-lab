@@ -85,8 +85,7 @@ jobs:
           # 下記はエラー
           # which terraform-graph-beautifier
 
-          # ls "\$GOROOT"
-          ls "$GOROOT"
+          ls /opt/hostedtoolcache/go/1.17.11/x64
 
       - name: Create branch
         run: |

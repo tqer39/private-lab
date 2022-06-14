@@ -59,6 +59,7 @@
     "cyto",
     "GOPATH",
     "GOROOT",
-    "GOBIN"
+    "GOBIN",
+    "hostedtoolcache"
   ]
 }
