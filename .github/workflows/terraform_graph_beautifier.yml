@@ -104,6 +104,11 @@ jobs:
           # which terraform-graph-beautifier
           # ls ~/go/bin
 
+          terraform -chdir="${{ env.TF_PATH }}" graph | "$HOME/go/bin/terraform-graph-beautifier" \
+            --exclude="module.root.provider" \
+            --output-type=cyto-html \
+            > "${{ env.TF_PATH }}/dependence.html"
+
       - name: Create branch
         run: |
           DATE="$(date '+%Y-%m-%d')"
@@ -111,18 +116,13 @@ jobs:
           git config user.name "Github Actions"
           git remote set-url origin "https://github-actions:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}"
           git switch -c "terraform-graph-beautifier/${DATE}-${GITHUB_RUN_NUMBER}"
-        env:
-          TZ: "Asia/Tokyo"
-
-      - name: Create graph
-        run: |
-          terraform -chdir="${{ env.TF_PATH }}" graph | "$HOME/go/bin/terraform-graph-beautifier" \
-            --exclude="module.root.provider" \
-            --output-type=cyto-html \
-            > "${{ env.TF_PATH }}/dependence.html"
-
           # git add "${{ env.TF_PATH }}/dependence.html"
           # git commit -m "GitHub Actions から差分を Push"
           # git push origin "HEAD:${GITHUB_REF}"
           # git switch main
           # git merge "HEAD:${GITHUB_REF}"
+        env:
+          TZ: "Asia/Tokyo"
+
+      # - name: Create graph
+      #   run: |
