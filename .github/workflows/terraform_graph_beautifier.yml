@@ -97,7 +97,7 @@ jobs:
           # ls "/opt/hostedtoolcache/go/1.17.11/x64/bin"
           # exec "${SHELL}" -l
           # 下記はエラー
-          which terraform-graph-beautifier
+          # which terraform-graph-beautifier
 
 
       - name: Create branch
@@ -112,7 +112,7 @@ jobs:
 
       - name: Create graph
         run: |
-          terraform -chdir="${{ env.TF_PATH }}" | /usr/share/go/bin/terraform-graph-beautifier \
+          terraform -chdir="${{ env.TF_PATH }}" | "$HOME/go/bin/terraform-graph-beautifier" \
             --exclude="module.root.provider" \
             --output-type=cyto-html \
             > "${{ env.TF_PATH }}/dependence.html"
