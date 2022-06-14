@@ -75,8 +75,8 @@ jobs:
           # echo "GOPATH: ${GOPATH}"
           # go get -u github.com/pcasteran/terraform-graph-beautifier
           # go get github.com/pcasteran/terraform-graph-beautifier
-          go get -d github.com/pcasteran/terraform-graph-beautifier
-          # go install github.com/pcasteran/terraform-graph-beautifier
+          # go get -d github.com/pcasteran/terraform-graph-beautifier
+          go install github.com/pcasteran/terraform-graph-beautifier
 
       - name: Create branch
         run: |
