@@ -105,8 +105,10 @@ jobs:
           # ls ~/go/bin
 
           echo "1 ============================================="
-          # terraform -chdir="${{ env.TF_PATH }}" init -reconfigure
-          terraform -chdir="${{ env.TF_PATH }}" init -upgrade
+          terraform -chdir="${{ env.TF_PATH }}" init -reconfigure
+          terraform -chdir="${{ env.TF_PATH }}" validate
+          terraform -chdir="${{ env.TF_PATH }}" plan
+          # terraform -chdir="${{ env.TF_PATH }}" init -upgrade
           echo "2 ============================================="
           # terraform -chdir="${{ env.TF_PATH }}" graph
           # "$HOME/go/bin/terraform-graph-beautifier" -v
