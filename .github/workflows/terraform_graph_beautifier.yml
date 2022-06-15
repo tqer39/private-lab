@@ -119,6 +119,7 @@ jobs:
           # terraform -chdir="${{ env.TF_PATH }}" graph
 
           terraform -chdir="${{ env.TF_PATH }}" graph >> input.txt
+          echo "4 ============================================="
           "$HOME/go/bin/terraform-graph-beautifier" --input=input.txt \
             --exclude="module.root.provider" \
             --output-type=cyto-html \
