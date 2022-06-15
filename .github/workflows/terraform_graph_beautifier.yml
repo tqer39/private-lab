@@ -104,7 +104,9 @@ jobs:
           # which terraform-graph-beautifier
           # ls ~/go/bin
 
-          # terraform -chdir="${{ env.TF_PATH }}" init -reconfigure
+          echo "1 ============================================="
+          terraform -chdir="${{ env.TF_PATH }}" init -reconfigure
+          echo "2 ============================================="
           # terraform -chdir="${{ env.TF_PATH }}" graph
           # "$HOME/go/bin/terraform-graph-beautifier" -v
 
@@ -112,15 +114,16 @@ jobs:
           #   --exclude="module.root.provider" \
           #   --output-type=cyto-html \
           #   > "${{ env.TF_PATH }}/dependence.html"
-          echo "1 ============================================="
+          echo "3 ============================================="
 
-          terraform -chdir="${{ env.TF_PATH }}" graph > input.txt;
-          echo "2 ============================================="
+          # terraform -chdir="${{ env.TF_PATH }}" graph
+
+          terraform -chdir="${{ env.TF_PATH }}" graph >> input.txt
           "$HOME/go/bin/terraform-graph-beautifier" --input=input.txt \
             --exclude="module.root.provider" \
             --output-type=cyto-html \
             > "${{ env.TF_PATH }}/dependence.html"
-          echo "3 ============================================="
+          echo "4 ============================================="
 
       - name: Create branch
         run: |
