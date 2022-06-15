@@ -113,7 +113,7 @@ jobs:
           #   --output-type=cyto-html \
           #   > "${{ env.TF_PATH }}/dependence.html"
 
-          terraform -chdir="${{ env.TF_PATH }}" graph > input.txt
+          terraform -chdir="${{ env.TF_PATH }}" graph > input.txt;
           "$HOME/go/bin/terraform-graph-beautifier" --input=input.txt \
             --exclude="module.root.provider" \
             --output-type=cyto-html \
