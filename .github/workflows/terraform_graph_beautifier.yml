@@ -106,8 +106,8 @@ jobs:
 
           echo "1 ============================================="
           terraform -chdir="${{ env.TF_PATH }}" init -reconfigure
-          terraform -chdir="${{ env.TF_PATH }}" validate
-          terraform -chdir="${{ env.TF_PATH }}" plan
+          # terraform -chdir="${{ env.TF_PATH }}" validate
+          # terraform -chdir="${{ env.TF_PATH }}" plan
           # terraform -chdir="${{ env.TF_PATH }}" init -upgrade
           echo "2 ============================================="
           # terraform -chdir="${{ env.TF_PATH }}" graph
@@ -127,7 +127,7 @@ jobs:
           #   --exclude="module.root.provider" \
           #   --output-type=cyto-html \
           #   > "./dependence.html"
-          "$HOME/go/bin/terraform-graph-beautifier" -input input.txt \
+          "$HOME/go/bin/terraform-graph-beautifier" -debug -input input.txt \
             > "./dependence.html"
           echo "5 ============================================="
 
