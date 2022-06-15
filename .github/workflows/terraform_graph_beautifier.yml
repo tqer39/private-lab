@@ -127,7 +127,7 @@ jobs:
           #   --exclude="module.root.provider" \
           #   --output-type=cyto-html \
           #   > "./dependence.html"
-          "$HOME/go/bin/terraform-graph-beautifier" -debug -input input.txt \
+          "$HOME/go/bin/terraform-graph-beautifier" -debug -input input.txt -exclude "module.root.provider" \
             > "./dependence.html"
           echo "5 ============================================="
 
