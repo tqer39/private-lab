@@ -104,11 +104,18 @@ jobs:
           # which terraform-graph-beautifier
           # ls ~/go/bin
 
-          terraform -chdir="${{ env.TF_PATH }}" init -reconfigure
+          # terraform -chdir="${{ env.TF_PATH }}" init -reconfigure
           # terraform -chdir="${{ env.TF_PATH }}" graph
-          "$HOME/go/bin/terraform-graph-beautifier" -v
+          # "$HOME/go/bin/terraform-graph-beautifier" -v
 
-          terraform -chdir="${{ env.TF_PATH }}" graph | "$HOME/go/bin/terraform-graph-beautifier" \
+          # terraform -chdir="${{ env.TF_PATH }}" graph | "$HOME/go/bin/terraform-graph-beautifier" \
+          #   --exclude="module.root.provider" \
+          #   --output-type=cyto-html \
+          #   > "${{ env.TF_PATH }}/dependence.html"
+
+          terraform -chdir="${{ env.TF_PATH }}" graph > input.txt
+          "$HOME/go/bin/terraform-graph-beautifier" --input=input.txt \
+            --exclude="module.root.provider" \
             --output-type=cyto-html \
             > "${{ env.TF_PATH }}/dependence.html"
 
