@@ -123,7 +123,7 @@ jobs:
           "$HOME/go/bin/terraform-graph-beautifier" --input=input.txt \
             --exclude="module.root.provider" \
             --output-type=cyto-html \
-            > "${{ env.TF_PATH }}/dependence.html"
+            > "./dependence.html"
           echo "5 ============================================="
 
       - name: Create branch
