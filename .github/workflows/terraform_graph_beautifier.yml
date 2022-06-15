@@ -109,7 +109,6 @@ jobs:
           "$HOME/go/bin/terraform-graph-beautifier" -v
 
           terraform -chdir="${{ env.TF_PATH }}" graph | "$HOME/go/bin/terraform-graph-beautifier" \
-            --exclude="module.root.provider" \
             --output-type=cyto-html \
             > "${{ env.TF_PATH }}/dependence.html"
 
