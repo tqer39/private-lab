@@ -122,11 +122,12 @@ jobs:
           # terraform -chdir="${{ env.TF_PATH }}" graph
 
           # terraform -chdir="${{ env.TF_PATH }}" graph >> input.txt
-          input="$(terraform -chdir=${{ env.TF_PATH }} graph)"
-          input="${input//'%'/'%25'}"
-          input="${input//$'\n'/'%0A'}"
-          input="${input//$'\r'/'%0D'}"
-          echo "$input" >> input.txt
+          sed "s/\%0A//g" input.txt
+          # input="$(terraform -chdir=${{ env.TF_PATH }} graph)"
+          # input="${input//'%'/'%25'}"
+          # input="${input//$'\n'/'%0A'}"
+          # input="${input//$'\r'/'%0D'}"
+          # echo "$input" >> input.txt
 
           echo "4 ============================================="
           # "$HOME/go/bin/terraform-graph-beautifier" --input=input.txt \
