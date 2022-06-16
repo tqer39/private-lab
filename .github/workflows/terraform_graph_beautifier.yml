@@ -121,7 +121,7 @@ jobs:
 
           # terraform -chdir="${{ env.TF_PATH }}" graph
 
-          # terraform -chdir="${{ env.TF_PATH }}" graph >> input.txt
+          terraform -chdir="${{ env.TF_PATH }}" graph >> input.txt
           sed "s/\%0A//g" input.txt
           # input="$(terraform -chdir=${{ env.TF_PATH }} graph)"
           # input="${input//'%'/'%25'}"
