@@ -1,0 +1,8 @@
+---
+terraform:
+  plan:
+    when_no_changes:
+      label: "no-changes"
+      # label:
+      label_color:
+      # null, "", label のみ, when_no_changes のみはダメ。
